@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "concurrently -r \"yarn run start:server\" \"wait-on http://localhost:1234/ && yarn run start:electron\" --kill-others --success first",
+    "start:server": "parcel src/index.html",
+    "start:electron": "electron ."
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,6 +19,9 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^2.0.0"
+    "concurrently": "^3.5.1",
+    "electron": "^2.0.0",
+    "parcel-bundler": "^1.8.1",
+    "wait-on": "^2.1.0"
   }
 }
